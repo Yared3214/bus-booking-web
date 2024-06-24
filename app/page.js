@@ -6,9 +6,9 @@ import SignInPage from "./Pages/SignInPage";
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col justify-between">
-      {/* <HomePage/> */}
+      <HomePage/>
       {/* <SingUpPage/> */}
-      <SignInPage/>
+      {/* <SignInPage/> */}
           </main>
   );
 }
