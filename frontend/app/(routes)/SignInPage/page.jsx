@@ -6,7 +6,7 @@ function SignInPage() {
     <div class="w-full max-w-[1000px] ml-[100px]">
         <div class="mt-10 mb-8">
             <Image src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-            alt="Traveler Banner" class="w-full h-[200px] rounded-lg object-cover" width={50} height={50}/>
+            alt="Traveler Banner" class="w-full h-[200px] rounded-lg object-cover" width={2069} height={200}/>
         </div>
         <h1 class="text-2xl font-semibold mb-2">Welcome to Traveler</h1>
         <p class="text-gray-600 mb-6">Explore the world, connect with locals, and take the trip of a lifetime.</p>

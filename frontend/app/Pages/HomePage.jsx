@@ -24,7 +24,7 @@ function HomePage(){
           </div>
           <div class="flex flex-1 justify-end gap-8">
             <div class="flex items-center gap-9">
-              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">Book ticket</a>
+              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="/BookTicket">Book ticket</a>
               <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">Deposit</a>
               <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">My bookings</a>
               <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">Edit profile</a>
