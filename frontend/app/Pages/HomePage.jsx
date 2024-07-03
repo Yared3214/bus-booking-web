@@ -1,51 +1,10 @@
-'use client'
-import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import React from 'react'
 
-
-  
-
 function HomePage(){
-  const router = useRouter();
   return (
     <div class="relative flex size-full min-h-screen flex-col bg-[#FFFFFF] group/design-root overflow-x-hidden">
       <div class="layout-container flex h-full grow flex-col">
-        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#F4EFE6] px-10 py-3">
-          <div class="flex items-center gap-4 text-[#1C160C]">
-            <div class="size-4">
-              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z"
-                  fill="currentColor"
-                ></path>
-              </svg>
-            </div>
-            <h2 class="text-[#1C160C] text-lg font-bold leading-tight tracking-[-0.015em]">Bus Travel</h2>
-          </div>
-          <div class="flex flex-1 justify-end gap-8">
-            <div class="flex items-center gap-9">
-              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="/BookTicket">Book ticket</a>
-              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">Deposit</a>
-              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">My bookings</a>
-              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">Edit profile</a>
-            </div>
-            <div class="flex gap-2">
-              <button
-                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#019863] text-[#FFFFFF] text-sm font-bold leading-normal tracking-[0.015em]"
-                onClick={()=>router.push('/SignUpPage')}
-              >
-                <span class="truncate">Sign up</span>
-              </button>
-              <button
-                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#F4EFE6] text-[#1C160C] text-sm font-bold leading-normal tracking-[0.015em]"
-                onClick={()=>router.push('/SignInPage')}
-
-              >
-                <span class="truncate">Sign in</span>
-              </button>
-            </div>
-          </div>
-        </header>
         <div class="px-40 flex flex-1 justify-center py-5">
           <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
             <div class="@container">
@@ -95,24 +54,89 @@ function HomePage(){
                 </div>
               </div>
             </div>
-            <div class="flex flex-col gap-10 px-4 py-10 @container">
-              <h1
-                class="text-[#1C160C] tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px]"
-              >
-                Why choose Bus Travel?
-              </h1>
-              <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-0">
-                <div class="flex flex-1 gap-3 rounded-lg border border-[#E9DFCE] bg-[#FFFFFF] p-4 flex-col">
-                  <h2 class="text-[#1C160C] text-base font-bold leading-tight">We've got you covered</h2>
+     <div class="mx-auto my-12">
+        <h2 class="text-4xl font-bold text-left font-display">Why BusGo</h2>
+        <p class="text-gray-600 text-left mb-12">We're here to help you travel comfortably and safely.</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="mb-4">
+                <div class="feature-card border-none rounded-lg overflow-hidden shadow-sm">
+                    <Image width={2069} height={250} src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                    class="card-img-top w-full h-64 object-cover" alt="On-time guarantee"/>
+                    <div class="card-body text-center p-4">
+                        <div class="feature-card-title text-lg font-bold">On-time guarantee</div>
+                    </div>
                 </div>
-                <div class="flex flex-1 gap-3 rounded-lg border border-[#E9DFCE] bg-[#FFFFFF] p-4 flex-col">
-                  <h2 class="text-[#1C160C] text-base font-bold leading-tight">Travel your way</h2>
-                </div>
-                <div class="flex flex-1 gap-3 rounded-lg border border-[#E9DFCE] bg-[#FFFFFF] p-4 flex-col">
-                  <h2 class="text-[#1C160C] text-base font-bold leading-tight">Safety is our priority</h2>
-                </div>
-              </div>
             </div>
+            <div class="mb-4">
+                <div class="feature-card border-none rounded-lg overflow-hidden shadow-sm">
+                    <Image width={2069} height={250} src="https://images.unsplash.com/photo-1572016047668-5b5e909e1605?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                    class="card-img-top w-full h-64 object-cover" alt="Real-time tracking"/>
+                    <div class="card-body text-center p-4">
+                        <div class="feature-card-title text-lg font-bold">Real-time tracking</div>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-4">
+                <div class="feature-card border-none rounded-lg overflow-hidden shadow-sm">
+                    <Image width={2069} height={250} src="https://plus.unsplash.com/premium_photo-1671462505492-03f9682bff61?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                    class="card-img-top w-full h-64 object-cover" alt="Free Wi-Fi and power outlets"/>
+                    <div class="card-body text-center p-4">
+                        <div class="feature-card-title text-lg font-bold">Free Wi-Fi and power outlets</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mx-auto my-12">
+        <h2 class="text-4xl font-bold text-left font-display mb-10">Popular routes</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="mb-4">
+                <div class="feature-card border-none rounded-lg overflow-hidden shadow-sm">
+                    <Image width={2069} height={250} src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Addis_abeba_meskele_square_%28cropped%29.jpg/272px-Addis_abeba_meskele_square_%28cropped%29.jpg" 
+                    class="card-img-top w-full h-64 object-cover" alt="On-time guarantee"/>
+                    <div class="card-body text-center p-4">
+                        <div class="feature-card-title text-lg font-bold">Addis Ababa</div>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-4">
+                <div class="feature-card border-none rounded-lg overflow-hidden shadow-sm">
+                    <Image width={2069} height={250} src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/59/a7/bd/l-hotel-domine-le-lac.jpg?w=1400&h=1400&s=1" 
+                    class="card-img-top w-full h-64 object-cover" alt="Real-time tracking"/>
+                    <div class="card-body text-center p-4">
+                        <div class="feature-card-title text-lg font-bold">Hawassa</div>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-4">
+                <div class="feature-card border-none rounded-lg overflow-hidden shadow-sm">
+                    <Image width={2069} height={250} src="https://borkena.com/wp-content/uploads/2024/03/Bahir-Dar-Security-Update.jpg" 
+                    class="card-img-top w-full h-64 object-cover" alt="Free Wi-Fi and power outlets"/>
+                    <div class="card-body text-center p-4">
+                        <div class="feature-card-title text-lg font-bold">Bahirdar</div>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-4">
+                <div class="feature-card border-none rounded-lg overflow-hidden shadow-sm">
+                    <Image width={2069} height={250} src="https://www.historyhit.com/app/uploads/2020/11/Harar-Jugol.jpg" 
+                    class="card-img-top w-full h-64 object-cover" alt="Free Wi-Fi and power outlets"/>
+                    <div class="card-body text-center p-4">
+                        <div class="feature-card-title text-lg font-bold">Harer</div>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-4">
+                <div class="feature-card border-none rounded-lg overflow-hidden shadow-sm">
+                    <Image width={2069} height={250} src="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcSnh6RWdB1MxRneRHdU3zETh57UbgD6saX9AhNZ7FnJT3sU7CLx7bA03dnBp0DFdA13T1fWmycG1K_YEZ4EZ7eJMicRb1K2D1O5o1LuBQ" 
+                    class="card-img-top w-full h-64 object-cover" alt="Free Wi-Fi and power outlets"/>
+                    <div class="card-body text-center p-4">
+                        <div class="feature-card-title text-lg font-bold">Gonder</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
             <div class="flex flex-col gap-10 px-4 py-10 @container">
               <h1
                 class="text-[#1C160C] tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px]"
@@ -142,7 +166,7 @@ function HomePage(){
             </div>
           </div>
         </div>
-        <footer class="flex justify-center">
+        {/* <footer class="flex justify-center">
           <div class="flex max-w-[960px] flex-1 flex-col">
             <footer class="flex flex-col gap-6 px-5 py-10 text-center @container">
               <div class="flex flex-wrap items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-around">
@@ -185,8 +209,9 @@ function HomePage(){
               <p class="text-[#A18249] text-base font-normal leading-normal">@2022 Bus Travel, Inc.</p>
             </footer>
           </div>
-        </footer>
+        </footer> */}
       </div>
+    </div>
     </div>
   )
 }

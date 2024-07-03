@@ -41,7 +41,7 @@ function page() {
                 <button type="submit" class="w-2/5 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 focus:ring focus:ring-green-300">Search Routes</button>
             </form>
         </section>
-        <section class="mt-10">
+        <section class="mt-10 mb-10">
             <h2 class="text-xl font-semibold text-gray-800 mb-4">Popular Routes</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
                  {/* Route 1 --> */}
