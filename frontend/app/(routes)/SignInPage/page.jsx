@@ -1,7 +1,32 @@
-import React from 'react'
+'use client'
+import React, { useState } from 'react'
 import Image from 'next/image'
 
 function SignInPage() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    const response = await fetch('http://localhost:5000/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password })
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      setMessage(data.message);  // Login successful  
+    } else {
+      setMessage(data.message);  // User not found or invalid credentials 
+    }
+    console.log(message);
+  };
+
   return (
     <div class="w-full max-w-[1000px] ml-[100px]">
         <div class="mt-10 mb-8">
@@ -10,10 +35,14 @@ function SignInPage() {
         </div>
         <h1 class="text-2xl font-semibold mb-2">Welcome to Traveler</h1>
         <p class="text-gray-600 mb-6">Explore the world, connect with locals, and take the trip of a lifetime.</p>
-        <form>
+        <form onSubmit={handleSubmit}>
             <div class="mb-4">
+              {message.length > 0 ? 
+              <div className='p-[10px] w-[400px] rounded-lg bg-red-200 text-center ml-20'>{message}</div> : ''}
+              
                 <label for="email" class="block text-gray-700">Email</label>
                 <input
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="email"
                 class="form-input flex w-[500px] min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#1C160C] focus:outline-0 focus:ring-0 border-none bg-[#F4EFE6] focus:border-none h-14 placeholder:text-[#A18249] p-4 text-base font-normal leading-normal"
                 
@@ -22,6 +51,7 @@ function SignInPage() {
             <div class="mb-4">
                 <label for="password" class="block text-gray-700">Password</label>
                 <input
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="password"
                 class="form-input flex w-[500px] min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#1C160C] focus:outline-0 focus:ring-0 border-none bg-[#F4EFE6] focus:border-none h-14 placeholder:text-[#A18249] p-4 text-base font-normal leading-normal"
                 
