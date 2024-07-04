@@ -8,7 +8,7 @@ const ProtectedRoute = ({ children }) => {
 
   useEffect(() => {
     if (!loading && !user) {
-      router.push('/SignInpage');
+      router.push('/SignInPage');
     }
   }, [loading, user]);
 

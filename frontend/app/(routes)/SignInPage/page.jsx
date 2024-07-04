@@ -9,26 +9,6 @@ function SignInPage() {
   const [message, setMessage] = useState('');
   const { login } = useAuth();
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-    
-  //   const response = await fetch('http://localhost:5000/login', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({ email, password })
-  //   });
-
-  //   const data = await response.json();
-  //   if (response.ok) {
-  //     setMessage(data.token);  // Login successful  
-  //   } else {
-  //     setMessage(data.message);  // User not found or invalid credentials 
-  //   }
-  //   console.log(message);
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     await login(email, password);

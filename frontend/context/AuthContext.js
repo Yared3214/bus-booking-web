@@ -41,7 +41,6 @@ export function AuthProvider({ children }) {
     });
     setUser(userData.user);
     router.push('/');
-    console.log(user);
   };
 
   const logout = () => {

@@ -1,9 +1,19 @@
 'use client'
+import { useAuth } from '@/context/AuthContext';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import React from 'react'
+import React, { useEffect } from 'react'
 
 function Header() {
+
+  useEffect(()=>{
+    console.log(userProfile);
+  })
+  const { logout, user } = useAuth();
+  const userProfile = user ? (user?.fullName?.split(' ')[0][0] + user?.fullName?.split(' ')[1][0]).toUpperCase() : '';
+  const handleLogout = () => {
+    logout();
+  }
     const router = useRouter();
   return (
     <div>
@@ -26,7 +36,7 @@ function Header() {
               <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">My bookings</a>
               <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">Edit profile</a>
             </div>
-            <div class="flex gap-2">
+            {!user ? <div class="flex gap-2">
               <button
                 class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#019863] text-[#FFFFFF] text-sm font-bold leading-normal tracking-[0.015em]"
                 onClick={()=>router.push('/SignUpPage')}
@@ -40,7 +50,16 @@ function Header() {
               >
                 <span class="truncate">Sign in</span>
               </button>
-            </div>
+            </div> :  <div class="flex gap-2 items-center">
+              <div className='p-3 bg-green-400 rounded-full'>{userProfile}</div>
+              <button
+                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#F4EFE6] text-[#1C160C] text-sm font-bold leading-normal tracking-[0.015em]"
+                onClick={handleLogout}
+
+              >
+                <span class="truncate">Logout</span>
+              </button>
+            </div>}
           </div>
         </header>
     </div>

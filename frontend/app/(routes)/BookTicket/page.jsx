@@ -1,8 +1,11 @@
+'use client'
+import ProtectedRoute from '@/components/ProtectedRoute'
 import Image from 'next/image'
 import React from 'react'
 
-function page() {
+function BookTicket() {
   return (
+    <ProtectedRoute>
     <div >
         <main class="container mx-auto mt-10">
         <section class="bg-white p-8 rounded-lg ">
@@ -87,8 +90,9 @@ function page() {
 
 
     </div>
+    </ProtectedRoute>
   )
 }
 
-export default page
+export default BookTicket
 

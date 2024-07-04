@@ -64,7 +64,7 @@ app.get('/user', async (req, res) => {
     res.status(401).json({ message: 'Invalid token' });
   }
 })
-  
+
 
   const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
