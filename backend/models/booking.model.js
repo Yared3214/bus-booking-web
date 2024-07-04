@@ -2,28 +2,34 @@ const mongoose = require("mongoose");
 
 const bookingSchema = new mongoose.Schema(
     {
-      bus: {
+      user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Bus',
+        ref: 'User',
         required: true
       },
-      cost: {
+      route: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Route',
+        required: true
+      },
+      seatNumber: {
         type: Number,
         required: true,
         trim: true,
+        min: 50,
+        max: 5000
       },
-      source: {
+      paymentStatus: {
+        type: Buffer,
+        required: true,
+      },
+      date: {
         type: String,
         required: true,
       },
-      destination: {
+      time: {
         type: String,
         require: true,
-      },
-      driverName: {
-        type: String,
-        require: true,
-        trim: true
       }
     },
     { timestamps: true }
