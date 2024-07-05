@@ -1,9 +1,24 @@
 'use client'
 import ProtectedRoute from '@/components/ProtectedRoute'
+import { useAuth } from '@/context/AuthContext'
 import Image from 'next/image'
-import React from 'react'
+import { useRouter } from 'next/navigation'
+import React, { useEffect, useState } from 'react'
 
 function BookTicket() {
+    const { user } = useAuth();
+    const router = useRouter();
+    const [source, setSource] = useState('');
+    const [destination, setDestination] = useState('');
+    const [date, setDate] = useState('');
+    // const { source, destination, date, 
+    //     setDate, setDestination, setSource } = useAuth();
+
+    const handleNavigation = () => {
+        sessionStorage.setItem('userData', JSON.stringify({ source: source, destination: destination, date: date }));
+        router.push('/SeatNumber');
+    }
+
   return (
     <ProtectedRoute>
     <div >
@@ -15,34 +30,49 @@ function BookTicket() {
             <form class="space-y-4">
                 <div>
                     <label for="name" class="block text-md font-semibold text-gray-700">Name</label>
-                    <input type="text" id="name" name="name" class="w-2/5 px-4 py-2 border-2 border-[#f4efe6] text-[#1C160C] rounded-lg placeholder:text-[#A18249] focus:border-none"
+                    <input type="text" id="name" name="name" value={user?.fullName} disabled
+                    class="w-2/5 px-4 py-2 border-2 border-[#f4efe6] text-[#1C160C] rounded-lg placeholder:text-[#A18249] focus:border-none"
                     placeholder='Enter your full name'/>
                 </div>
                 <div>
                     <label for="phone" class="block text-md font-semibold text-gray-700">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" class="w-2/5 px-4 py-2 border-2 border-[#f4efe6] text-[#1C160C] rounded-lg placeholder:text-[#A18249] focus:border-none"
+                    <input type="tel" id="phone" name="phone" value={user?.PhoneNumber} disabled
+                    class="w-2/5 px-4 py-2 border-2 border-[#f4efe6] text-[#1C160C] rounded-lg placeholder:text-[#A18249] focus:border-none"
                     placeholder='Enter your phone number'/>
                 </div>
                 <div>
                     <label for="source" class="block text-md font-semibold text-gray-700">Source</label>
-                    <select id="source" name="source" class="w-2/5 px-4 py-2 border-2 border-[#f4efe6] text-[#1C160C] rounded-lg placeholder:text-[#A18249] focus:border-none">
-                        <option value="">Select your source</option>
+                    <select value={source} onChange={(e)=>setSource(e.target.value)} id="source" name="source" 
+                    class="w-2/5 px-4 py-2 border-2 border-[#f4efe6] text-[#1C160C] rounded-lg placeholder:text-[#A18249] focus:border-none">
+                        <option>Select your source</option>
+                        <option>Addis Ababa</option>
+                        <option>Harer</option>
+                        <option>Bahirdar</option>
+                        <option>Hawassa</option>
+                        <option>Gonder</option>
                          {/* Add options here --> */}
                     </select>
                 </div>
                 <div>
                     <label for="destination" class="block text-md font-semibold text-gray-700">Destination</label>
-                    <select id="destination" name="destination" class="w-2/5 px-4 py-2 border-2 border-[#f4efe6] text-[#1C160C] rounded-lg placeholder:text-[#A18249] focus:border-none">
+                    <select value={destination} onChange={(e)=>setDestination(e.target.value)} id="destination" name="destination" 
+                    class="w-2/5 px-4 py-2 border-2 border-[#f4efe6] text-[#1C160C] rounded-lg placeholder:text-[#A18249] focus:border-none">
                         <option value="">Select your destination</option>
+                        <option>Addis Ababa</option>
+                        <option>Harer</option>
+                        <option>Bahirdar</option>
+                        <option>Hawassa</option>
+                        <option>Gonder</option>
                          {/* Add options here --> */}
                     </select>
                 </div>
                 <div>
                     <label for="date" class="block text-md font-semibold text-gray-700">Date</label>
-                    <input type="date" id="date" name="date" class="w-2/5 px-4 py-2 border-2 border-[#f4efe6] text-[#1C160C] rounded-lg placeholder:text-[#A18249] focus:border-none"/>
+                    <input value={date} onChange={(e)=>setDate(e.target.value)} type="date" id="date" name="date" 
+                    class="w-2/5 px-4 py-2 border-2 border-[#f4efe6] text-[#1C160C] rounded-lg placeholder:text-[#A18249] focus:border-none"/>
                 </div>
-                <button type="submit" class="w-2/5 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 focus:ring focus:ring-green-300">Search Routes</button>
             </form>
+            <button onClick={handleNavigation} class="w-2/5 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 focus:ring focus:ring-green-300">Search Routes</button>
         </section>
         <section class="mt-10 mb-10">
             <h2 class="text-xl font-semibold text-gray-800 mb-4">Popular Routes</h2>

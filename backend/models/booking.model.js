@@ -16,12 +16,10 @@ const bookingSchema = new mongoose.Schema(
         type: Number,
         required: true,
         trim: true,
-        min: 50,
-        max: 5000
       },
       paymentStatus: {
-        type: Buffer,
-        required: true,
+        type: String,
+        default: 'pending'
       },
       date: {
         type: String,
@@ -29,12 +27,12 @@ const bookingSchema = new mongoose.Schema(
       },
       time: {
         type: String,
-        require: true,
+        default: '10:00 AM'
       }
     },
     { timestamps: true }
   );
 
-  const Deposit = mongoose.model("Deposit", depositSchema);
+  const Booking = mongoose.model("Booking", bookingSchema);
 
-module.exports = { Deposit };
+module.exports = Booking;

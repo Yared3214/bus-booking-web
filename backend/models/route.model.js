@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const bookingSchema = new mongoose.Schema(
+const routeSchema = new mongoose.Schema(
     {
       bus: {
         type: mongoose.Schema.Types.ObjectId,
@@ -29,6 +29,6 @@ const bookingSchema = new mongoose.Schema(
     { timestamps: true }
   );
 
-  const Deposit = mongoose.model("Deposit", depositSchema);
+  const Route = mongoose.model("Route", routeSchema);
 
-module.exports = { Deposit };
+module.exports = { Route };

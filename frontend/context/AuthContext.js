@@ -9,6 +9,9 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const [source , setSource] = useState('');
+  const [destination, setDestination] = useState('');
+  const [date, setDate] = useState('');
 
   useEffect(() => {
     async function loadUserFromCookies() {
@@ -50,7 +53,16 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout }}>
+    <AuthContext.Provider value={{ user, 
+    loading, 
+    login, 
+    logout,
+    source,
+    destination,
+    date,
+    setDate,
+    setDestination,
+    setSource }}>
       {children}
     </AuthContext.Provider>
   );

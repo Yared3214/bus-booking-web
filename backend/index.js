@@ -5,7 +5,10 @@ const cors = require('cors');
 const { User } = require('./models/user.model')
 const bodyParser = require('body-parser');
 const registerRoute = require('./routes/register');
-
+const seatsRouter = require('./routes/seats');
+const routesRouter = require('./routes/routes');
+const busRouter = require('./routes/bus');
+const bookingRoute = require('./routes/booking');
 const app = express();
 
 // Middleware
@@ -22,6 +25,11 @@ mongoose.connect('mongodb+srv://yaredman0099:yarednewdatabasepass3214@cluster0.t
   });
 
   app.use('/register', registerRoute);
+  app.use('/seats', seatsRouter);
+  app.use('/routes', routesRouter);
+  app.use('/bus', busRouter);
+  app.use('/book', bookingRoute);
+
   
   app.post('/login', async (req, res) => {
     let jwtSecretKey = "583f7933b6da53a77a5e37a092b50372513b52ff1c0ac14e2ca0f5a02fabf5b3ac1bfbefc1d5456d653b98fdc256e4d1a0535e518922189a72e2f28a7b60b56e";

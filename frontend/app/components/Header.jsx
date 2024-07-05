@@ -5,10 +5,7 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react'
 
 function Header() {
-
-  useEffect(()=>{
-    console.log(userProfile);
-  })
+  
   const { logout, user } = useAuth();
   const userProfile = user ? (user?.fullName?.split(' ')[0][0] + user?.fullName?.split(' ')[1][0]).toUpperCase() : '';
   const handleLogout = () => {
