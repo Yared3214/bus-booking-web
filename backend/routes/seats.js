@@ -6,7 +6,7 @@ const Seat = require('../models/seat.model');
 router.post('/', async (req, res) => {
   try {
     for (let i = 1; i <= 50; i++) {
-      const seat = new Seat({ seatNumber: i, route: req.body.route, date: req.body.date });
+      const seat = new Seat({ seatNumber: i, routeId: req.body.route, date: req.body.date });
       await seat.save();
     }
     res.status(201).send('Seats initialized');
@@ -16,21 +16,21 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/', async (req, res) => {
-  const { route, date } = req.query;
+  const { routeId, date } = req.query;
   try {
     let seats = await Seat.find({
-      route,
+      routeId,
       date,
     });
     
     // If seats are not initialized, initialize them
     if (seats.length === 0) {
       for (let i = 1; i <= 50; i++) {
-        const seat = new Seat({ seatNumber: i, route, date });
+        const seat = new Seat({ seatNumber: i, routeId, date });
         await seat.save();
       }
       seats = await Seat.find({
-        route,
+        routeId,
         date,
       });
       return res.status(201).json({ message: 'Seats initialized', seats });

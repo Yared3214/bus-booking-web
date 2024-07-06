@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const seatSchema = new mongoose.Schema({
   seatNumber: { type: Number, required: true, unique: false },
   isBooked: { type: Boolean, default: false },
-  route: {
+  routeId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Route',
     required: true

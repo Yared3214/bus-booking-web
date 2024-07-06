@@ -10,6 +10,7 @@ function SeatNumber() {
     const { user } = useAuth();
     const [seats, setSeats] = useState([]);
     const [selectedSeat, setSelectedSeat] = useState(null);
+    const [error, setError] = useState('');
     const [routeId, setRouteId] = useState('');
     const [data, setData] = useState(null);
     const [source, setSource] = useState('');
@@ -41,7 +42,7 @@ function SeatNumber() {
           });
           setRouteId(response.data);
         } catch (error) {
-          console.error("Error fetching route ID:", error);
+          setError("Error fetching route ID:");
         }
       };
     
@@ -64,7 +65,7 @@ function SeatNumber() {
               setSeats(response.data);
             }
             catch (error) {
-              console.error("Error fetching seats:", error);
+              setError("Error fetching seats:");
             }
           };
           fetchSeats();
@@ -79,41 +80,78 @@ function SeatNumber() {
     
       const handleBooking = async () => {
         if (selectedSeat) {
-          const response = await axios.post('http://localhost:5000/book', {
+          try {
+            console.log("Posting a book with params:", { selectedSeat, routeId, date });
+            const response = await axios.post('http://localhost:5000/book', {
             seatNumber: selectedSeat,
-            route: routeId,
+            routeId: routeId,
             date: date,
-            user: user?.fullName,
+            user: user?._id,
           });
           alert(response.data.message);
-          const updatedSeats = await axios.get(`http://localhost:5000/seats/${routeId}/${date}/${time}`);
+          const updatedSeats = await axios.get(`http://localhost:5000/seats/`, {
+            params: { routeId, date }
+          });
           setSeats(updatedSeats.data);
           setSelectedSeat(null);
+        }
+        catch(error) {
+          setError('error booking a ticket');
+        } 
         }
       };
     
   return (
-    <div className='grid grid-cols-2 mx-48'>
-        <div className='grid grid-cols-2 w-[600px] mt-10'>
-        <div className='grid grid-cols-2 w-[150px]'>
-        {array.map((item, index)=>(
-            <div id={index} className='p-3 rounded-lg w-[50px] bg-gray-300 text-center mb-3'>
-                {item}
-            </div>
-        ))}
+    // <div className='grid grid-cols-2 mx-48'>
+    //     <div className='grid grid-cols-2 w-[600px] mt-10'>
+    //     <div className='grid grid-cols-2 w-[150px]'>
+    //     {array.map((item, index)=>(
+    //         <div id={index} className='p-3 rounded-lg w-[50px] bg-gray-300 text-center mb-3'>
+    //             {item}
+    //         </div>
+    //     ))}
+    //     </div>
+    //     <div className='grid grid-cols-2 w-[150px]'>
+    //         {array1.map((item, index)=>(
+    //             <div id={index} className='p-3 rounded-lg w-[50px] bg-gray-300 text-center mb-3'>
+    //                 {item}
+    //             </div>
+    //         ))}
+    //     </div>
+    // </div>
+    // <div className='mt-10'>
+    //     <h2 className='text-lg'>select a seat to book ticket</h2>
+    //     {error && <p style={{ color: 'red' }}>{error}</p>}
+    // </div>
+    // </div>
+    <div>
+    <h1>Select a Seat</h1>
+    {error && <p style={{ color: 'red' }}>{error}</p>}
+    <div style={{ display: 'flex', flexWrap: 'wrap', maxWidth: '300px' }}>
+      {seats.map((seat) => (
+        <div
+          key={seat.seatNumber}
+          onClick={() => handleSeatClick(seat)}
+          style={{
+            width: '50px',
+            height: '50px',
+            margin: '5px',
+            backgroundColor: seat.isBooked ? 'red' : seat.seatNumber === selectedSeat ? 'blue' : 'green',
+            cursor: seat.isBooked ? 'not-allowed' : 'pointer',
+            color: 'white',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          {seat.seatNumber}
         </div>
-        <div className='grid grid-cols-2 w-[150px]'>
-            {array1.map((item, index)=>(
-                <div id={index} className='p-3 rounded-lg w-[50px] bg-gray-300 text-center mb-3'>
-                    {item}
-                </div>
-            ))}
-        </div>
+      ))}
     </div>
-    <div className='mt-10'>
-        <h2 className='text-lg'>select a seat to book ticket</h2>
-    </div>
-    </div>
+    <button onClick={handleBooking} disabled={!selectedSeat}>
+      Book Seat
+    </button>
+  </div>
     
   )
 }
