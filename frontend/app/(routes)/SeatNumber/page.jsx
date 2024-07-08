@@ -1,12 +1,15 @@
 'use client'
+import ProtectedRoute from '@/components/ProtectedRoute';
 import { useAuth } from '@/context/AuthContext';
 import axios from 'axios';
+import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
-function SeatNumber() {
-    const array = [1,2,5,6,9,10,13,14,17,18,21,22,25,26,29,30,33,34,37,38,41,42,45,46,49,50]
-    const array1 = [3,4,7,8,11,12,15,16,19,20,23,24,27,28,31,32,35,36,39,40,43,44,47,48] 
+function SeatNumber() { 
 
+    const router = useRouter();
+    const searchParams = useSearchParams(); 
+    const numbersArray = Array.from({ length: 26 }, (_, i) => i + 1);
     const { user } = useAuth();
     const [seats, setSeats] = useState([]);
     const [selectedSeat, setSelectedSeat] = useState(null);
@@ -17,6 +20,13 @@ function SeatNumber() {
     const [destination, setDestination] = useState('');
     const [date, setDate] = useState('');
     const [paymentStatus, setPaymentStatus] = useState('paid'); // Placeholder for payment status
+
+    useEffect(() => {
+      const from = searchParams.get('from');
+      if (from !== 'BookTicket') {
+          router.push('/BookTicket');
+      }
+  }, [router, searchParams]);
 
     useEffect(() => {
       const userData = sessionStorage.getItem('userData');
@@ -31,7 +41,7 @@ function SeatNumber() {
         setDestination(data.destination);
         setDate(data.date);
       }
-    },[data])
+    },[data]);
 
     useEffect(() => {
       const fetchRouteId = async () => {
@@ -70,7 +80,7 @@ function SeatNumber() {
           };
           fetchSeats();
         }
-      }, [routeId, date]);
+      }, [routeId, date, seats]);
     
       const handleSeatClick = (seat) => {
         if (!seat.isBooked) {
@@ -102,57 +112,79 @@ function SeatNumber() {
       };
     
   return (
-    // <div className='grid grid-cols-2 mx-48'>
-    //     <div className='grid grid-cols-2 w-[600px] mt-10'>
-    //     <div className='grid grid-cols-2 w-[150px]'>
-    //     {array.map((item, index)=>(
-    //         <div id={index} className='p-3 rounded-lg w-[50px] bg-gray-300 text-center mb-3'>
-    //             {item}
-    //         </div>
-    //     ))}
-    //     </div>
-    //     <div className='grid grid-cols-2 w-[150px]'>
-    //         {array1.map((item, index)=>(
-    //             <div id={index} className='p-3 rounded-lg w-[50px] bg-gray-300 text-center mb-3'>
-    //                 {item}
-    //             </div>
-    //         ))}
-    //     </div>
-    // </div>
-    // <div className='mt-10'>
-    //     <h2 className='text-lg'>select a seat to book ticket</h2>
-    //     {error && <p style={{ color: 'red' }}>{error}</p>}
-    // </div>
-    // </div>
+    <ProtectedRoute>
     <div>
-    <h1>Select a Seat</h1>
-    {error && <p style={{ color: 'red' }}>{error}</p>}
-    <div style={{ display: 'flex', flexWrap: 'wrap', maxWidth: '300px' }}>
-      {seats.map((seat) => (
-        <div
-          key={seat.seatNumber}
-          onClick={() => handleSeatClick(seat)}
-          style={{
-            width: '50px',
-            height: '50px',
-            margin: '5px',
-            backgroundColor: seat.isBooked ? 'red' : seat.seatNumber === selectedSeat ? 'blue' : 'green',
-            cursor: seat.isBooked ? 'not-allowed' : 'pointer',
-            color: 'white',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          {seat.seatNumber}
-        </div>
+    {seats?.length > 0 ? <div className='grid grid-cols-2 mx-48'>
+      <div className='grid grid-cols-2 w-[600px] mt-10'>
+      <div className='grid grid-cols-2 w-[150px]'>
+      {seats?.filter((seat, index) => {
+        return Math.floor(index / 2) % 2 === 0;
+      }).map((seat, index)=>(
+          <div onClick={() => handleSeatClick(seat)}
+           id={index} 
+           className={`p-3 rounded-lg w-[50px] ${seat?.isBooked ? 'bg-red-400 cursor-not-allowed' : seat.seatNumber == selectedSeat ? 'bg-green-400 cursor-pointer' : 'bg-gray-300 cursor-pointer'} text-center mb-3`}>
+              {seat.seatNumber}
+          </div>
       ))}
-    </div>
-    <button onClick={handleBooking} disabled={!selectedSeat}>
-      Book Seat
-    </button>
+      </div>
+      <div className='grid grid-cols-2 w-[150px]'>
+          {seats?.filter((seat, index) => {
+        return Math.floor((index - 2) / 2) % 2 === 0;
+      }).map((seat, index)=>(
+              <div onClick={() => handleSeatClick(seat)} 
+              id={index} 
+              className={`p-3 rounded-lg w-[50px] ${seat?.isBooked ? 'bg-red-400 cursor-not-allowed' : seat.seatNumber == selectedSeat ? 'bg-green-400 cursor-pointer' : 'bg-gray-300 cursor-pointer'} text-center mb-3
+              `}>
+                  {seat.seatNumber}
+              </div>
+          ))}
+      </div>
   </div>
-    
+  <div className='mt-10'>
+      <h2 className='text-lg font-semibold'>Select a seat to book ticket</h2>
+      <h2 className='text-md text-gray-500 mt-5'>Description</h2>
+      <div className='flex flex-col gap-5 mt-5 mb-5'>
+      <div className='flex gap-3'>
+      <div className='p-3 rounded-lg w-[40px] bg-red-400'></div>
+      <p>- Not available(Already booked)</p>
+      </div>
+      <div className='flex gap-3'>
+      <div className='p-3 rounded-lg w-[40px] bg-gray-300'></div>
+      <p>- available</p>
+      </div>
+      </div>
+      <button onClick={handleBooking} disabled={!selectedSeat} className='p-32 py-2 rounded-lg bg-[#F4EFE6] ml-32'>
+      Book
+      </button>
+      {error && <p className='px-5 py-2 w-[400px] bg-red-200 text-center mt-5 rounded-lg ml-20'>{error}</p>}
+  </div>
+  </div> :  
+  <div className='grid grid-cols-2 mx-48'>
+  <div className='grid grid-cols-2 w-[600px] mt-10'>
+  <div className='grid grid-cols-2 w-[150px]'>
+  {numbersArray.map((item, index)=>(
+      <div id={index} 
+       className='p-3 rounded-lg w-[50px] bg-slate-200  mb-3 animate-pulse'>
+      </div>
+  ))}
+  </div>
+  <div className='grid grid-cols-2 w-[150px]'>
+      {numbersArray.map((item, index)=>(
+          <div id={index} 
+          className='p-3 rounded-lg w-[50px] bg-slate-200  mb-3 animate-pulse'>
+          </div>
+      ))}
+  </div>
+  </div>
+  <div className='mt-10'>
+  <div className='p-4 w-[500px] bg-slate-200 animate-pulse rounded-md mb-10'></div>
+  <button className='p-32 py-5 rounded-lg bg-slate-200 ml-32 animate-pulse'>
+  </button>
+  {error && <p style={{ color: 'red' }}>{error}</p>}
+  </div>
+  </div> }
+  </div>
+  </ProtectedRoute>
   )
 }
 

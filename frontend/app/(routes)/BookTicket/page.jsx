@@ -16,7 +16,7 @@ function BookTicket() {
 
     const handleNavigation = () => {
         sessionStorage.setItem('userData', JSON.stringify({ source: source, destination: destination, date: date }));
-        router.push('/SeatNumber');
+        router.push('/SeatNumber?from=BookTicket');
     }
 
   return (

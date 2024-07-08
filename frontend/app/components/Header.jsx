@@ -26,10 +26,16 @@ function Header() {
             </div>
             <Link href='/'><h2 class="text-[#1C160C] text-lg font-bold leading-tight tracking-[-0.015em]">Bus Travel</h2></Link>
           </div>
+          
+            {user && 
+            <div className='ml-10 flex gap-3 items-center'>
+            <h2 className='font-semibold'>Balance:</h2>
+          <div className='px-4 py-2 bg-[#F4EFE6] w-[100px] rounded-lg text-center'>{user?.balance} br</div>
+          </div>}
           <div class="flex flex-1 justify-end gap-8">
             <div class="flex items-center gap-9">
               <a class="text-[#1C160C] text-sm font-medium leading-normal" href="/BookTicket">Book ticket</a>
-              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">Deposit</a>
+              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="/Deposit">Deposit</a>
               <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">My bookings</a>
               <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">Edit profile</a>
             </div>

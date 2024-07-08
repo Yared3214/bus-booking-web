@@ -6,8 +6,6 @@ const depositSchema = new mongoose.Schema(
         type: Number,
         required: true,
         trim: true,
-        min: 50,
-        max: 5000
       },
       receipt: {
         type: Buffer,
@@ -23,4 +21,4 @@ const depositSchema = new mongoose.Schema(
 
   const Deposit = mongoose.model("Deposit", depositSchema);
 
-module.exports = { Deposit };
+module.exports = Deposit ;

@@ -61,7 +61,8 @@ function SingUpPage() {
               <p class="text-[#1C160C] text-base font-medium leading-normal pb-2">Full Name</p>
               <input name='fullName' value={formData.fullName} onChange={handleChange}
                 placeholder="Enter your full name"
-                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#1C160C] focus:outline-0 focus:ring-0 border-none bg-[#F4EFE6] focus:border-none h-14 placeholder:text-[#A18249] p-4 text-base font-normal leading-normal"
+                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#1C160C] focus:outline-0 focus:ring-0 border-none bg-[#F4EFE6] 
+                focus:border-none h-14 placeholder:text-[#A18249] p-4 text-base font-normal leading-normal"
               />
             </label>
           </div>
@@ -70,7 +71,8 @@ function SingUpPage() {
               <p class="text-[#1C160C] text-base font-medium leading-normal pb-2">Username</p>
               <input name='userName' value={formData.userName} onChange={handleChange}
                 placeholder="Pick a username"
-                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#1C160C] focus:outline-0 focus:ring-0 border-none bg-[#F4EFE6] focus:border-none h-14 placeholder:text-[#A18249] p-4 text-base font-normal leading-normal"
+                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#1C160C] focus:outline-0 focus:ring-0 border-none bg-[#F4EFE6] 
+                focus:border-none h-14 placeholder:text-[#A18249] p-4 text-base font-normal leading-normal"
                 
               />
             </label>
@@ -83,7 +85,8 @@ function SingUpPage() {
               <p class="text-[#1C160C] text-base font-medium leading-normal pb-2">Phone Number (Optional)</p>
               <input name='PhoneNumber' value={formData.PhoneNumber} onChange={handleChange}
                 placeholder="Enter your phone number"
-                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#1C160C] focus:outline-0 focus:ring-0 border-none bg-[#F4EFE6] focus:border-none h-14 placeholder:text-[#A18249] p-4 text-base font-normal leading-normal"
+                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#1C160C] focus:outline-0 focus:ring-0 border-none bg-[#F4EFE6] 
+                focus:border-none h-14 placeholder:text-[#A18249] p-4 text-base font-normal leading-normal"
                 
               />
             </label>
@@ -97,7 +100,8 @@ function SingUpPage() {
               <p class="text-[#1C160C] text-base font-medium leading-normal pb-2">Email</p>
               <input name='email' value={formData.email} onChange={handleChange}
                 placeholder="Enter your email"
-                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#1C160C] focus:outline-0 focus:ring-0 border-none bg-[#F4EFE6] focus:border-none h-14 placeholder:text-[#A18249] p-4 text-base font-normal leading-normal"
+                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#1C160C] focus:outline-0 focus:ring-0 border-none bg-[#F4EFE6] 
+                focus:border-none h-14 placeholder:text-[#A18249] p-4 text-base font-normal leading-normal"
                 
               />
             </label>
@@ -107,12 +111,14 @@ function SingUpPage() {
               <p class="text-[#1C160C] text-base font-medium leading-normal pb-2">Password</p>
               <input name='password' value={formData.password} onChange={handleChange}
                 placeholder="Create a password"
-                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#1C160C] focus:outline-0 focus:ring-0 border-none bg-[#F4EFE6] focus:border-none h-14 placeholder:text-[#A18249] p-4 text-base font-normal leading-normal"
+                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#1C160C] focus:outline-0 focus:ring-0 border-none bg-[#F4EFE6] 
+                focus:border-none h-14 placeholder:text-[#A18249] p-4 text-base font-normal leading-normal"
                 
               />
               <input
                 placeholder="confirm a password"
-                class="mt-7 form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#1C160C] focus:outline-0 focus:ring-0 border-none bg-[#F4EFE6] focus:border-none h-14 placeholder:text-[#A18249] p-4 text-base font-normal leading-normal"
+                class="mt-7 form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#1C160C] focus:outline-0 focus:ring-0 border-none bg-[#F4EFE6] 
+                focus:border-none h-14 placeholder:text-[#A18249] p-4 text-base font-normal leading-normal"
                 
               />
               <input

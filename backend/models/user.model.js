@@ -41,6 +41,14 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true
   },
+  balance: {
+    type: String,
+    default: '0'
+  },
+  role: {
+    type: String,
+    default: 'user'
+  }
   },
   { timestamps: true }
 );
