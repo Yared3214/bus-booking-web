@@ -1,6 +1,7 @@
 import { useAuth } from '../context/AuthContext';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import { ClipLoader } from 'react-spinners';
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -13,7 +14,11 @@ const ProtectedRoute = ({ children }) => {
   }, [loading, user]);
 
   if (loading || !user) {
-    return <p>Loading...</p>;
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <ClipLoader size={50} color="#A18249" />
+      </div>
+    );
   }
 
   return children;

@@ -1,15 +1,14 @@
 'use client'
+import ProtectedRoute from '@/components/ProtectedRoute';
 import { useState } from 'react';
 import { ClipLoader } from 'react-spinners';
+import { toast } from "sonner"
 
 export default function Deposit() {
     const [amount, setAmount] = useState(0);
     const [selectedFile, setSelectedFile] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [preview, setPreview] = useState(null);
-    const [message, setMessage] = useState('');
-    const [error, setError] = useState('');
-
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         setSelectedFile(file);
@@ -43,21 +42,32 @@ export default function Deposit() {
           });
 
         if (response.ok) {
-            setMessage('Deposit submitted successfully.');
+            toast("Deposit submitted successfully.", {
+                description: "Your deposit will be verified within 24 hours",
+                action: {
+                  label: "Undo",
+                  onClick: () => console.log("Undo"),
+                },
+              });
             setAmount('');
             setSelectedFile(null);
             setPreview(null);
         } else {
-            setMessage('Error submitting deposit.');
+            toast("Error submitting deposit.", {
+                description: "Please try again.",
+              });
         }
      } catch (error) {
-        setMessage('Error:', error);
+        toast("Server error", {
+            description: "Please try again.",
+          });
      } finally {
         setIsLoading(false);
      }
     };
 
     return (
+        <ProtectedRoute>
         <div className="min-h-screen bg-gray-50 p-6">
             <main className="max-w-2xl mx-auto mt-8">
                 <div className="mb-4">
@@ -112,5 +122,6 @@ export default function Deposit() {
                 </form>
             </main>
         </div>
+        </ProtectedRoute>
     );
 }

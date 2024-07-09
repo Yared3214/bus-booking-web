@@ -27,4 +27,13 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.get('/:userId', async (req, res) => {
+  try {
+    const bookings = await Booking.find({ user: req.params.userId }).populate('routeId');
+    res.status(200).json({ bookings });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 module.exports = router;

@@ -36,7 +36,7 @@ function Header() {
             <div class="flex items-center gap-9">
               <a class="text-[#1C160C] text-sm font-medium leading-normal" href="/BookTicket">Book ticket</a>
               <a class="text-[#1C160C] text-sm font-medium leading-normal" href="/Deposit">Deposit</a>
-              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">My bookings</a>
+              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="/MyBooking">My bookings</a>
               <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">Edit profile</a>
             </div>
             {!user ? <div class="flex gap-2">
