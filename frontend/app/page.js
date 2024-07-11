@@ -1,10 +1,10 @@
 import Image from "next/image";
-import HomePage from "./Pages/HomePage";
+import LandingPage from "./Pages/LandingPage";
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col justify-between">
-      <HomePage/>
+      <LandingPage/>
           </main>
   );
 }

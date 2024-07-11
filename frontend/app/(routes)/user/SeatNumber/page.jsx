@@ -24,7 +24,7 @@ function SeatNumber() {
     useEffect(() => {
       const from = searchParams.get('from');
       if (from !== 'BookTicket') {
-          router.push('/BookTicket');
+          router.push('/user/BookTicket');
       }
   }, [router, searchParams]);
 

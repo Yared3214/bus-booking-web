@@ -37,7 +37,7 @@ function SignInPage() {
             </div>
             <div class="mb-4">
                 <label for="password" class="block text-gray-700">Password</label>
-                <input
+                <input type='password'
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="password"
                 class="form-input flex w-[500px] min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#1C160C] focus:outline-0 focus:ring-0 border-none bg-[#F4EFE6] focus:border-none h-14 placeholder:text-[#A18249] p-4 text-base font-normal leading-normal"

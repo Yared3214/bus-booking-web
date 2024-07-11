@@ -1,4 +1,5 @@
 'use client'
+import ProtectedRoute from '@/components/ProtectedRoute';
 import { useAuth } from '@/context/AuthContext';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
@@ -17,7 +18,7 @@ export default function EditProfile() {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
 
-  useEffect(() => {
+  useEffect(() => { 
     // Fetch current user data
     console.log('fetching uset with params: ', user?._id);
     axios.get(`http://localhost:5000/change/${user?._id}`)
@@ -66,6 +67,7 @@ export default function EditProfile() {
 
 
   return (
+    <ProtectedRoute>
     <div class="relative flex size-full min-h-screen flex-col bg-[#FFFFFF] group/design-root overflow-x-hidden">
     <div class="layout-container flex h-full grow flex-col">
       <div class="px-20 flex flex-1 justify-center py-5">
@@ -169,6 +171,6 @@ export default function EditProfile() {
       </div>
     </div>
   </div>
-
+  </ProtectedRoute>
   );
 }
