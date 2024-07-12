@@ -20,11 +20,6 @@ const routeSchema = new mongoose.Schema(
         type: String,
         require: true,
       },
-      driverName: {
-        type: String,
-        require: true,
-        trim: true
-      }
     },
     { timestamps: true }
   );

@@ -14,7 +14,39 @@ function Header() {
     const router = useRouter();
   return (
     <div>
-      {user?.role == "user" ? <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#F4EFE6] px-10 py-3">
+      {user?.role == "admin" ? <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#F4EFE6] px-10 py-3">
+          <div class="flex items-center gap-4 text-[#1C160C]">
+            <div class="size-4">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </div>
+            <Link href='/'><h2 class="text-[#1C160C] text-lg font-bold leading-tight tracking-[-0.015em]">Bus Travel Admin</h2></Link>
+          </div>
+          <div class="flex flex-1 justify-end gap-8">
+            <div class="flex items-center gap-9">
+              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">Dashboard</a>
+              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">Check Booking</a>
+              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">Cancel bookings</a>
+              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">Verify Deposit</a>
+              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">Manage Route</a>
+
+            </div>
+            <div class="flex gap-2 items-center">
+              <div className='p-3 bg-green-400 rounded-full'>{userProfile}</div>
+              <button
+                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#F4EFE6] text-[#1C160C] text-sm font-bold leading-normal tracking-[0.015em]"
+                onClick={handleLogout}
+
+              >
+                <span class="truncate">Logout</span>
+              </button>
+            </div>
+          </div>
+        </header> : <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#F4EFE6] px-10 py-3">
           <div class="flex items-center gap-4 text-[#1C160C]">
             <div class="size-4">
               <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -63,38 +95,6 @@ function Header() {
                 <span class="truncate">Logout</span>
               </button>
             </div>}
-          </div>
-        </header> : <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#F4EFE6] px-10 py-3">
-          <div class="flex items-center gap-4 text-[#1C160C]">
-            <div class="size-4">
-              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z"
-                  fill="currentColor"
-                ></path>
-              </svg>
-            </div>
-            <Link href='/'><h2 class="text-[#1C160C] text-lg font-bold leading-tight tracking-[-0.015em]">Bus Travel Admin</h2></Link>
-          </div>
-          <div class="flex flex-1 justify-end gap-8">
-            <div class="flex items-center gap-9">
-              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">Dashboard</a>
-              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">Check Booking</a>
-              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">Cancel bookings</a>
-              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">Verify Deposit</a>
-              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">Manage Route</a>
-
-            </div>
-            <div class="flex gap-2 items-center">
-              <div className='p-3 bg-green-400 rounded-full'>{userProfile}</div>
-              <button
-                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#F4EFE6] text-[#1C160C] text-sm font-bold leading-normal tracking-[0.015em]"
-                onClick={handleLogout}
-
-              >
-                <span class="truncate">Logout</span>
-              </button>
-            </div>
           </div>
         </header>}        
     </div>

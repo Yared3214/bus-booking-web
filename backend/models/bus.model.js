@@ -7,6 +7,11 @@ const busSchema = new mongoose.Schema(
         required: true,
         unique: true,
         trim: true,
+      },
+      driverName: {
+        type: String,
+        require: true,
+        trim: true
       }
     },
     { timestamps: true }
