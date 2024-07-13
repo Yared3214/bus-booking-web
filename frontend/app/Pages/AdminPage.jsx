@@ -7,6 +7,9 @@ function page() {
   const [pastBookings, setPastBookings] = useState([]);
   const [selectedTab, setSelectedTab] = useState('Current');
   const [userCount, setUserCount] = useState();
+  const [tickets, setTickets] = useState();
+  const [buses, setBuses] = useState();
+  const [pending, setPending] = useState();
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -31,6 +34,39 @@ function page() {
       }
     };
 
+    const fetchTickets = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/admin/ticket-count');
+        const data = await response.json();
+        setTickets(data.count);
+      } catch (error) {
+        console.error('Error fetching tickets:', error);
+      }
+    };
+
+    const fetchBuses = async() => {
+      try {
+        const response = await fetch('http://localhost:5000/admin/bus-count');
+        const data = await response.json();
+        setBuses(data.count);
+      } catch (error) {
+        console.error('Error fetching tickets:', error);
+      }
+    };
+
+    const fetchPendings = async() => {
+      try {
+        const response = await fetch('http://localhost:5000/admin/pending-count');
+        const data = await response.json();
+        setPending(data.count);
+      } catch (error) {
+        console.error('Error fetching tickets:', error);
+      }
+    }
+
+    fetchPendings();
+    fetchBuses();
+    fetchTickets();
     fetchUsers();
     fetchBookings();
   }, []);
@@ -68,17 +104,17 @@ function page() {
               </div>
               <div className="flex min-w-[158px] flex-1 flex-col gap-2 rounded-xl p-6 border border-[#E9DFCE]">
                 <p className="text-[#1C160C] text-base font-medium leading-normal">Tickets Sold</p>
-                <p className="text-[#1C160C] tracking-light text-2xl font-bold leading-tight">3,567</p>
+                <p className="text-[#1C160C] tracking-light text-2xl font-bold leading-tight">{tickets}</p>
               </div>
               <div className="flex min-w-[158px] flex-1 flex-col gap-2 rounded-xl p-6 border border-[#E9DFCE]">
                 <p className="text-[#1C160C] text-base font-medium leading-normal">Active Buses</p>
-                <p className="text-[#1C160C] tracking-light text-2xl font-bold leading-tight">45</p>
+                <p className="text-[#1C160C] tracking-light text-2xl font-bold leading-tight">{buses}</p>
               </div>
             </div>
             <div className="flex flex-wrap gap-4 p-4">
               <div className="flex min-w-[158px] flex-1 flex-col gap-2 rounded-xl p-6 border border-[#E9DFCE]">
                 <p className="text-[#1C160C] text-base font-medium leading-normal">Pending Requests</p>
-                <p className="text-[#1C160C] tracking-light text-2xl font-bold leading-tight">78</p>
+                <p className="text-[#1C160C] tracking-light text-2xl font-bold leading-tight">{pending}</p>
               </div>
             </div>
               <div class="flex px-4 py-3">
