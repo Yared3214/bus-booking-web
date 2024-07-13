@@ -28,11 +28,11 @@ function Header() {
           </div>
           <div class="flex flex-1 justify-end gap-8">
             <div class="flex items-center gap-9">
-              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">Dashboard</a>
-              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">Check Booking</a>
-              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">Cancel bookings</a>
-              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">Verify Deposit</a>
-              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">Manage Route</a>
+              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="/">Dashboard</a>
+              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="/admin/checkBooking">Check Booking</a>
+              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="/admin/cancelBooking">Cancel bookings</a>
+              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="/admin/verifyPayment">Verify Deposit</a>
+              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="/admin/manageRoute">Manage Route</a>
 
             </div>
             <div class="flex gap-2 items-center">

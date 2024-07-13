@@ -46,7 +46,7 @@ function BookTicket() {
                     class="w-2/5 px-4 py-2 border-2 border-[#f4efe6] text-[#1C160C] rounded-lg placeholder:text-[#A18249] focus:border-none">
                         <option>Select your source</option>
                         <option>Addis Ababa</option>
-                        <option>Harer</option>
+                        <option>Harar</option>
                         <option>Bahirdar</option>
                         <option>Hawassa</option>
                         <option>Gonder</option>
@@ -59,7 +59,7 @@ function BookTicket() {
                     class="w-2/5 px-4 py-2 border-2 border-[#f4efe6] text-[#1C160C] rounded-lg placeholder:text-[#A18249] focus:border-none">
                         <option value="">Select your destination</option>
                         <option>Addis Ababa</option>
-                        <option>Harer</option>
+                        <option>Harar</option>
                         <option>Bahirdar</option>
                         <option>Hawassa</option>
                         <option>Gonder</option>

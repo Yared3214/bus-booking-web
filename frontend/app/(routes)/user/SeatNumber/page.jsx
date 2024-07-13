@@ -46,7 +46,6 @@ function SeatNumber() {
     useEffect(() => {
       const fetchRouteId = async () => {
         try {
-          console.log("Fetching route ID with params:", { source, destination });
           const response = await axios.get(`http://localhost:5000/routes`, {
             params: { source, destination }
           });
@@ -68,7 +67,6 @@ function SeatNumber() {
         if (routeId) {
           const fetchSeats = async () => {
             try {
-              console.log("Fetching seats with params:", { routeId, date });
               const response = await axios.get(`http://localhost:5000/seats`, {
                 params: { routeId, date }
               });
@@ -91,7 +89,6 @@ function SeatNumber() {
       const handleBooking = async () => {
         if (selectedSeat) {
           try {
-            console.log("Posting a book with params:", { selectedSeat, routeId, date });
             const response = await axios.post('http://localhost:5000/book', {
             seatNumber: selectedSeat,
             routeId: routeId,

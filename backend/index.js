@@ -11,6 +11,7 @@ const busRouter = require('./routes/bus');
 const bookingRoute = require('./routes/booking');
 const depositRoute = require('./routes/deposit');
 const userRoute = require('./routes/changeProfile');
+const adminRoute = require('./routes/adminDashboard');
 const app = express();
 
 // Middleware
@@ -33,6 +34,7 @@ mongoose.connect('mongodb+srv://yaredman0099:yarednewdatabasepass3214@cluster0.t
   app.use('/book', bookingRoute);
   app.use('/deposit', depositRoute);
   app.use('/change', userRoute);
+  app.use('/admin', adminRoute);
 
   
   app.post('/login', async (req, res) => {

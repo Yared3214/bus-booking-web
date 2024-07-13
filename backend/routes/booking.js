@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Seat = require('../models/seat.model');
 const Booking = require('../models/booking.model');
+// const moment = require('moment');
 
 // Book a seat
 router.post('/', async (req, res) => {
@@ -35,5 +36,42 @@ router.get('/:userId', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+// router.get('/adminDashboard', async (req, res) => {
+//   try {
+//     const today = moment().startOf('day');
+//     const tomorrow = moment().add(1, 'days').startOf('day');
+//     const dayAfterTomorrow = moment().add(2, 'days').startOf('day');
+//     const twoDaysAgo = moment().subtract(2, 'days').startOf('day');
+//     const yesterday = moment().subtract(1, 'days').startOf('day');
+
+//     const currentBookings = await Booking.find({
+//       date: today.format('YYYY-MM-DD')
+//     }).populate('user routeId');
+
+//     const upcomingBookings = await Booking.find({
+//       date: {
+//         $gte: tomorrow.format('YYYY-MM-DD'),
+//         $lte: dayAfterTomorrow.format('YYYY-MM-DD')
+//       }
+//     }).populate('user routeId');
+
+//     const pastBookings = await Booking.find({
+//       date: {
+//         $gte: twoDaysAgo.format('YYYY-MM-DD'),
+//         $lte: yesterday.format('YYYY-MM-DD')
+//       }
+//     }).populate('user routeId');
+
+//     res.json({
+//       current: currentBookings,
+//       upcoming: upcomingBookings,
+//       past: pastBookings
+//     });
+//   } catch (error) {
+//     res.status(500).json({ message: 'Server Error', error });
+//   }
+// });
+
 
 module.exports = router;

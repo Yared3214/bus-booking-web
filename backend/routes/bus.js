@@ -3,10 +3,10 @@ const { Bus } = require('../models/bus.model');
 const router = express.Router();
 
 router.post('/', async (req, res) => {
-  const { plateNumber } = req.body;
+  const { plateNumber, driverName } = req.body;
 
   try {
-    const newBus = new Bus({ plateNumber });
+    const newBus = new Bus({ plateNumber, driverName });
 
     const savedBus = await newBus.save();
     res.status(201).json({ message: 'Bus added successfully', bus: savedBus });

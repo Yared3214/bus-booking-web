@@ -3,7 +3,7 @@ const { Route } = require('../models/route.model');
 const router = express.Router();
 
 router.post('/', async (req, res) => {
-  const { bus, cost, source, destination, driverName } = req.body;
+  const { bus, cost, source, destination } = req.body;
 
   try {
     const newRoute = new Route({
@@ -11,7 +11,6 @@ router.post('/', async (req, res) => {
       cost,
       source,
       destination,
-      driverName,
     });
 
     const savedRoute = await newRoute.save();
