@@ -125,6 +125,27 @@ router.get('/', async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
+
+router.get('/canceled', async (req, res) => {
+  try {
+    const canceledBookings = await Booking.find({ isCancelRequested: true }).populate('user').populate('routeId');
+    res.status(200).json(canceledBookings);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.delete('/delete/:id', async (req, res) => {
+  try {
+    const booking = await Booking.findByIdAndDelete(req.params.id);
+    if (!booking) {
+      return res.status(404).json({ error: 'Booking not found' });
+    }
+    res.status(200).json({ message: 'Booking cancelled successfully' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
   
   
   module.exports = router;

@@ -28,7 +28,11 @@ const bookingSchema = new mongoose.Schema(
       time: {
         type: String,
         default: '10:00 AM'
-      }
+      },
+      isCancelRequested: {
+        type: Boolean,
+        default: false
+    }
     },
     { timestamps: true }
   );

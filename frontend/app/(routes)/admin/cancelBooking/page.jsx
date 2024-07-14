@@ -1,129 +1,89 @@
-import React from 'react'
+'use client'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios';
+import { toast } from 'sonner';
 
 function CancelBooking() {
+  const [bookings, setBookings] = useState([]);
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    const getBookings = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/admin/canceled');
+        const data = await response.json();
+        setBookings(data);
+      } catch (error) {
+        console.error('Error fetching canceled bookings:', error);
+      }
+    };
+
+    getBookings();
+  });
+
+  const handleCancelation = async(id) => {
+    try {
+      const response = await fetch(`http://localhost:5000/admin/delete/${id}`, {
+        method: 'DELETE'
+      });
+      toast("Booking cancelled successfully", {
+        action: {
+          label: "Undo",
+          onClick: () => console.log("Undo"),
+        },
+      });
+    } catch (error) {
+      console.error('Error cancelling booking', error);
+    }
+  }
   return (
     <div className='px-48'>
         <h2 className='text-3xl font-bold m-5'>Cancel Booking</h2>
-        <div class="px-4 py-3 @container">
-              <div class="flex overflow-hidden rounded-xl border border-[#E9DFCE] bg-[#FFFFFF]">
-                <table class="flex-1">
+        <div className="px-4 py-3 @container">
+              <div className={` ${bookings.length > 0 ? 'flex overflow-hidden rounded-xl border border-[#E9DFCE] bg-[#FFFFFF]' : ''}`}>
+                {bookings.length > 0 ? <table className="flex-1" >
                   <thead>
-                    <tr class="bg-[#FFFFFF]">
-                      <th class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-120 px-4 py-3 text-left text-[#1C160C] w-[400px] text-sm font-medium leading-normal">
+                    <tr className="bg-[#FFFFFF]">
+                      <th className="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-120 px-4 py-3 text-left text-[#1C160C] w-[400px] text-sm font-medium leading-normal">
                         Booking ID
                       </th>
-                      <th class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-240 px-4 py-3 text-left text-[#1C160C] w-[400px] text-sm font-medium leading-normal">User</th>
-                      <th class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-360 px-4 py-3 text-left text-[#1C160C] w-[400px] text-sm font-medium leading-normal">
+                      <th className="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-240 px-4 py-3 text-left text-[#1C160C] w-[400px] text-sm font-medium leading-normal">User</th>
+                      <th className="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-360 px-4 py-3 text-left text-[#1C160C] w-[400px] text-sm font-medium leading-normal">
                         Departure
                       </th>
-                      <th class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-480 px-4 py-3 text-left text-[#1C160C] w-[400px] text-sm font-medium leading-normal">
+                      <th className="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-480 px-4 py-3 text-left text-[#1C160C] w-[400px] text-sm font-medium leading-normal">
                         Destination
                       </th>
-                      <th class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-600 px-4 py-3 text-left text-[#1C160C] w-[400px] text-sm font-medium leading-normal">Date</th>
-                      <th class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-720 px-4 py-3 text-left text-[#1C160C] w-60 text-sm font-medium leading-normal">Status</th>
+                      <th className="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-600 px-4 py-3 text-left text-[#1C160C] w-[400px] text-sm font-medium leading-normal">Date</th>
+                      <th className="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-720 px-4 py-3 text-left text-[#1C160C] w-60 text-sm font-medium leading-normal">Status</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="border-t border-t-[#E9DFCE]">
-                      <td class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-120 h-[72px] px-4 py-2 w-[400px] text-[#1C160C] text-sm font-normal leading-normal">#001</td>
-                      <td class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-240 h-[72px] px-4 py-2 w-[400px] text-[#1C160C] text-sm font-normal leading-normal">
-                        Alice Smith
+                    {bookings?.length > 0 ? bookings?.map((booking) => (
+                   <tr key={booking._id} className="border-t border-t-[#E9DFCE]">
+                      <td className="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-120 h-[72px] px-4 py-2 w-[400px] text-[#1C160C] text-sm font-normal leading-normal">{booking._id}</td>
+                      <td className="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-240 h-[72px] px-4 py-2 w-[400px] text-[#1C160C] text-sm font-normal leading-normal">
+                      {booking.user.userName}
                       </td>
-                      <td class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-360 h-[72px] px-4 py-2 w-[400px] text-[#1C160C] text-sm font-normal leading-normal">New York</td>
-                      <td class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-480 h-[72px] px-4 py-2 w-[400px] text-[#1C160C] text-sm font-normal leading-normal">Boston</td>
-                      <td class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-600 h-[72px] px-4 py-2 w-[400px] text-[#1C160C] text-sm font-normal leading-normal">
-                        05/20/2023
+                      <td className="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-360 h-[72px] px-4 py-2 w-[400px] text-[#1C160C] text-sm font-normal leading-normal">{booking.routeId.source}</td>
+                      <td className="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-480 h-[72px] px-4 py-2 w-[400px] text-[#1C160C] text-sm font-normal leading-normal">{booking.routeId.destination}</td>
+                      <td className="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-600 h-[72px] px-4 py-2 w-[400px] text-[#1C160C] text-sm font-normal leading-normal">
+                      {booking.date}
                       </td>
-                      <td class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-720 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 bg-[#F4EFE6] text-[#1C160C] text-sm font-medium leading-normal w-full"
+                      <td className="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-720 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
+                        <button onClick={() => handleCancelation(booking._id)}
+                          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 bg-[#F4EFE6] text-[#1C160C] text-sm font-medium leading-normal w-full"
                         >
-                          <span class="truncate">Canc</span>
+                          <span className="truncate">Cancel</span>
                         </button>
                       </td>
                     </tr>
-                    <tr class="border-t border-t-[#E9DFCE]">
-                      <td class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-120 h-[72px] px-4 py-2 w-[400px] text-[#1C160C] text-sm font-normal leading-normal">#002</td>
-                      <td class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-240 h-[72px] px-4 py-2 w-[400px] text-[#1C160C] text-sm font-normal leading-normal">
-                        Bob Jones
-                      </td>
-                      <td class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-360 h-[72px] px-4 py-2 w-[400px] text-[#1C160C] text-sm font-normal leading-normal">
-                        Washington
-                      </td>
-                      <td class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-480 h-[72px] px-4 py-2 w-[400px] text-[#1C160C] text-sm font-normal leading-normal">
-                        Philadelphia
-                      </td>
-                      <td class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-600 h-[72px] px-4 py-2 w-[400px] text-[#1C160C] text-sm font-normal leading-normal">
-                        05/21/2023
-                      </td>
-                      <td class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-720 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 bg-[#F4EFE6] text-[#1C160C] text-sm font-medium leading-normal w-full"
-                        >
-                          <span class="truncate">Pending</span>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr class="border-t border-t-[#E9DFCE]">
-                      <td class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-120 h-[72px] px-4 py-2 w-[400px] text-[#1C160C] text-sm font-normal leading-normal">#003</td>
-                      <td class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-240 h-[72px] px-4 py-2 w-[400px] text-[#1C160C] text-sm font-normal leading-normal">
-                        Charlie Davis
-                      </td>
-                      <td class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-360 h-[72px] px-4 py-2 w-[400px] text-[#1C160C] text-sm font-normal leading-normal">Boston</td>
-                      <td class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-480 h-[72px] px-4 py-2 w-[400px] text-[#1C160C] text-sm font-normal leading-normal">New York</td>
-                      <td class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-600 h-[72px] px-4 py-2 w-[400px] text-[#1C160C] text-sm font-normal leading-normal">
-                        05/22/2023
-                      </td>
-                      <td class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-720 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 bg-[#F4EFE6] text-[#1C160C] text-sm font-medium leading-normal w-full"
-                        >
-                          <span class="truncate">Cancelled</span>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr class="border-t border-t-[#E9DFCE]">
-                      <td class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-120 h-[72px] px-4 py-2 w-[400px] text-[#1C160C] text-sm font-normal leading-normal">#004</td>
-                      <td class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-240 h-[72px] px-4 py-2 w-[400px] text-[#1C160C] text-sm font-normal leading-normal">
-                        Diana Prince
-                      </td>
-                      <td class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-360 h-[72px] px-4 py-2 w-[400px] text-[#1C160C] text-sm font-normal leading-normal">
-                        Philadelphia
-                      </td>
-                      <td class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-480 h-[72px] px-4 py-2 w-[400px] text-[#1C160C] text-sm font-normal leading-normal">
-                        Washington
-                      </td>
-                      <td class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-600 h-[72px] px-4 py-2 w-[400px] text-[#1C160C] text-sm font-normal leading-normal">
-                        05/23/2023
-                      </td>
-                      <td class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-720 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 bg-[#F4EFE6] text-[#1C160C] text-sm font-medium leading-normal w-full"
-                        >
-                          <span class="truncate">Canc</span>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr class="border-t border-t-[#E9DFCE]">
-                      <td class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-120 h-[72px] px-4 py-2 w-[400px] text-[#1C160C] text-sm font-normal leading-normal">#005</td>
-                      <td class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-240 h-[72px] px-4 py-2 w-[400px] text-[#1C160C] text-sm font-normal leading-normal">
-                        Ethan Hunt
-                      </td>
-                      <td class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-360 h-[72px] px-4 py-2 w-[400px] text-[#1C160C] text-sm font-normal leading-normal">New York</td>
-                      <td class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-480 h-[72px] px-4 py-2 w-[400px] text-[#1C160C] text-sm font-normal leading-normal">Boston</td>
-                      <td class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-600 h-[72px] px-4 py-2 w-[400px] text-[#1C160C] text-sm font-normal leading-normal">
-                        05/24/2023
-                      </td>
-                      <td class="table-ca879d55-5ce6-4050-b2ed-325488f56824-column-720 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 bg-[#F4EFE6] text-[#1C160C] text-sm font-medium leading-normal w-full"
-                        >
-                          <span class="truncate">Canc</span>
-                        </button>
-                      </td>
-                    </tr>
+                    )) : <div></div>}
                   </tbody>
-                </table>
+                </table> : <div className='text-center text-lg'>
+                  No bookings found
+                  </div>}
+                
               </div>
               </div>
     </div>  

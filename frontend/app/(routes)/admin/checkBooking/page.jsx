@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react';
+import { ClipLoader } from 'react-spinners';
 
 const CheckBooking = () => {
   const [userName, setUserName] = useState('');
@@ -8,9 +9,11 @@ const CheckBooking = () => {
   const [destination, setDestination] = useState('');
   const [bookings, setBookings] = useState([]);
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleSearch = async () => {
     try {
+        setLoading(true);
         const response = await fetch(
             `http://localhost:5000/admin/search-bookings?${new URLSearchParams({
               userName,
@@ -19,9 +22,12 @@ const CheckBooking = () => {
               destination,
             })}`
           );
+          if(response) {
+            setLoading(false);
           const data = await response.json();
           setBookings(data);
           setError(data.message);
+          }
     } catch (error) {
         console.error('Error fetching results', error)
         setError(error.message);
@@ -79,7 +85,7 @@ const CheckBooking = () => {
                 className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 flex-1 bg-[#019863] text-[#FFFFFF] text-sm font-bold leading-normal tracking-[0.015em]"
                 onClick={handleSearch}
               >
-                <span className="truncate">Search</span>
+                {loading ? <ClipLoader size={20} color="#fff" /> : <span className="truncate">Search</span>}
               </button>
             </div>
             {bookings.length > 0 ? <div className="px-4 py-3 @container">
