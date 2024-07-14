@@ -80,11 +80,11 @@ router.get('/', async (req, res) => {
 
   router.get('/search-bookings', async (req, res) => {
     try {
-        const { username, date, source, destination } = req.query;
+        const { userName, date, source, destination } = req.query;
         let query = {};
 
-        if (username) {
-            const user = await User.findOne({ username });
+        if (userName) {
+            const user = await User.findOne({ userName });
             if (user) {
                 query.user = user._id;
             } else {
@@ -93,7 +93,12 @@ router.get('/', async (req, res) => {
         }
 
         if (date) {
+          const booking = await Booking.find({date});
+          if(booking.length == 0) {
+            return res.status(404).json({ message: 'Booking not found'})
+          } else {
             query.date = date;
+          }
         }
 
         if (source || destination) {
@@ -109,7 +114,12 @@ router.get('/', async (req, res) => {
             }
         }
 
-        const bookings = await Booking.find(query).populate('user').populate('routeId');
+        const bookings = await Booking.find(query).populate('user').populate({
+          path: 'routeId',
+          populate: [
+            {path: 'bus', model: 'Bus'} 
+          ]
+        });
         res.status(200).json(bookings);
     } catch (error) {
         res.status(500).json({ message: error.message });
