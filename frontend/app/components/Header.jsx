@@ -14,7 +14,7 @@ function Header() {
     const router = useRouter();
   return (
     <div>
-      {user?.role == "admin" ? <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#F4EFE6] px-10 py-3">
+      {user && user?.role == "admin" ? <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#F4EFE6] px-10 py-3">
           <div class="flex items-center gap-4 text-[#1C160C]">
             <div class="size-4">
               <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -46,7 +46,7 @@ function Header() {
               </button>
             </div>
           </div>
-        </header> : <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#F4EFE6] px-10 py-3">
+        </header> : user && <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#F4EFE6] px-10 py-3">
           <div class="flex items-center gap-4 text-[#1C160C]">
             <div class="size-4">
               <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -85,7 +85,7 @@ function Header() {
               >
                 <span class="truncate">Sign in</span>
               </button>
-            </div> :  <div class="flex gap-2 items-center">
+            </div> : <div class="flex gap-2 items-center">
               <div className='p-3 bg-green-400 rounded-full'>{userProfile}</div>
               <button
                 class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#F4EFE6] text-[#1C160C] text-sm font-bold leading-normal tracking-[0.015em]"

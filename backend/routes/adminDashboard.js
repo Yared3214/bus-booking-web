@@ -3,7 +3,8 @@ const router = express.Router();
 const Booking = require('../models/booking.model');
 const { Route } = require('../models/route.model');
 const { Bus } = require('../models/bus.model');
-const { User } = require('../models/user.model')
+const { User } = require('../models/user.model');
+const Deposit = require('../models/deposit.model');
 const moment = require('moment');
 
 router.get('/', async (req, res) => {
@@ -146,6 +147,22 @@ router.delete('/delete/:id', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+router.get('/deposits', async (req, res) => {
+  try {
+    const deposits = await Deposit.find().populate('user', 'userName email');
+
+    const depositsWithBase64Receipt = deposits.map(deposit => ({
+      ...deposit._doc,
+      receipt: deposit.receipt.toString('base64'),
+    }));
+
+    res.json(depositsWithBase64Receipt);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+});
+
   
   
   module.exports = router;

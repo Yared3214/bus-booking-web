@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { toast } from 'sonner';
+import ProtectedAdminRoute from '@/components/ProtectedAdminRoute';
 
 function CancelBooking() {
   const [bookings, setBookings] = useState([]);
@@ -37,7 +38,8 @@ function CancelBooking() {
     }
   }
   return (
-    <div className='px-48'>
+    <ProtectedAdminRoute>
+    <div className='px-48 flex flex-col min-h-screen'>
         <h2 className='text-3xl font-bold m-5'>Cancel Booking</h2>
         <div className="px-4 py-3 @container">
               <div className={` ${bookings.length > 0 ? 'flex overflow-hidden rounded-xl border border-[#E9DFCE] bg-[#FFFFFF]' : ''}`}>
@@ -80,13 +82,14 @@ function CancelBooking() {
                     </tr>
                     )) : <div></div>}
                   </tbody>
-                </table> : <div className='text-center text-lg'>
+                </table> : <div className='text-center my-52 text-lg'>
                   No bookings found
                   </div>}
                 
               </div>
               </div>
-    </div>  
+    </div> 
+    </ProtectedAdminRoute> 
   )
 }
 

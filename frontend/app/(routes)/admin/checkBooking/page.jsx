@@ -1,4 +1,5 @@
 'use client'
+import ProtectedAdminRoute from '@/components/ProtectedAdminRoute';
 import { useState } from 'react';
 import { ClipLoader } from 'react-spinners';
 
@@ -35,6 +36,7 @@ const CheckBooking = () => {
   };
 
   return (
+    <ProtectedAdminRoute>
     <div class="relative flex size-full min-h-screen flex-col bg-[#FFFFFF] group/design-root overflow-x-hidden">
       <div class="layout-container flex h-full grow flex-col">
         <div class="px-40 flex flex-1 justify-center py-5">
@@ -149,6 +151,7 @@ const CheckBooking = () => {
         </div>
       </div>
     </div>
+    </ProtectedAdminRoute>
   );
 };
 

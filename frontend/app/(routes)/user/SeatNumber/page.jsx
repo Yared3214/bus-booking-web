@@ -110,7 +110,7 @@ function SeatNumber() {
     
   return (
     <ProtectedRoute>
-    <div>
+    <div className='min-h-screen'>
     {seats?.length > 0 ? <div className='grid grid-cols-2 mx-48'>
       <div className='grid grid-cols-2 w-[600px] mt-10'>
       <div className='grid grid-cols-2 w-[150px]'>

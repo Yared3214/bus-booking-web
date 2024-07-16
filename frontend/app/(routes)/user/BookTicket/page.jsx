@@ -21,7 +21,7 @@ function BookTicket() {
 
   return (
     <ProtectedRoute>
-    <div >
+    <div className='min-h-screen'>
         <main class="container mx-auto mt-10">
         <section class="bg-white p-8 rounded-lg ">
             <Image width={2069} height={250} src="https://i.ibb.co/TvFmtRP/pexels-madsdonald-1178448.jpg" alt="Bus" class="w-full h-64 object-cover rounded-lg mb-6"/>

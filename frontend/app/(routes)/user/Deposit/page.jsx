@@ -1,5 +1,6 @@
 'use client'
 import ProtectedRoute from '@/components/ProtectedRoute';
+import { useAuth } from '@/context/AuthContext';
 import { useState } from 'react';
 import { ClipLoader } from 'react-spinners';
 import { toast } from "sonner"
@@ -9,6 +10,9 @@ export default function Deposit() {
     const [selectedFile, setSelectedFile] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [preview, setPreview] = useState(null);
+    const { user } = useAuth();
+
+
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         setSelectedFile(file);
@@ -32,6 +36,7 @@ export default function Deposit() {
         const formData = new FormData();
         formData.append('amount', amount);
         formData.append('receipt', selectedFile);
+        formData.append('user', user?._id)
 
         try {
         console.log("Posting a deposit with params:", {selectedFile, amount});

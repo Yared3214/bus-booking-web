@@ -8,7 +8,7 @@ function LandingPage() {
     const { user } = useAuth();
   return (
     <div>
-        {user?.role === 'admin' ? <AdminPage /> : <HomePage />}
+        {user?.role === 'user' ? <HomePage /> : <AdminPage />}
     </div>
   )
 }

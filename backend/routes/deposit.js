@@ -15,16 +15,16 @@ router.post('/', (req, res) => {
       return res.status(400).json({ message: 'Error parsing the files.', error: err });
     }
 
-    const { amount } = fields;
+    const { amount, user } = fields;
     const receiptFile = files.receipt && files.receipt[0]; // Access the first element of the receipt array
     const receipt = receiptFile ? fs.readFileSync(receiptFile.filepath) : null;
  
-    if (!amount || !receipt) {
+    if (!amount || !receipt || !user) {
       return res.status(400).json({ message: 'Amount and receipt are required.' });
     }
 
     try {
-      const deposit = new Deposit({ amount: amount[0], receipt, isVerified: false });
+      const deposit = new Deposit({ amount: amount[0], user: user[0], receipt, isVerified: false });
       await deposit.save();
       res.status(201).json({ message: 'Deposit submitted successfully.' });
     } catch (error) {
