@@ -20,6 +20,14 @@ const ProtectedRoute = ({ children }) => {
       </div>
     );
   }
+  
+  if (user.role !== 'user') {
+    return (
+        <div className='flex items-center justify-center min-h-screen'>
+            <h1 className='text-center text-xl font-medium'>404 - Page Not Found</h1>
+        </div>
+    )
+  }
 
   return children;
 };

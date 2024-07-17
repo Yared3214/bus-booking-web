@@ -1,11 +1,13 @@
 'use client'
 import { useAuth } from '@/context/AuthContext';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect } from 'react'
 
 function Header() {
   
+  const searchParams = useSearchParams();
+  const role = searchParams.get('role');
   const { logout, user } = useAuth();
   const userProfile = user ? (user?.fullName?.split(' ')[0][0] + user?.fullName?.split(' ')[1][0]).toUpperCase() : '';
   const handleLogout = () => {
@@ -14,7 +16,7 @@ function Header() {
     const router = useRouter();
   return (
     <div>
-      {user && user?.role == "admin" ? <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#F4EFE6] px-10 py-3">
+      {role == "a" ? <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#F4EFE6] px-10 py-3">
           <div class="flex items-center gap-4 text-[#1C160C]">
             <div class="size-4">
               <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -28,11 +30,11 @@ function Header() {
           </div>
           <div class="flex flex-1 justify-end gap-8">
             <div class="flex items-center gap-9">
-              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="/">Dashboard</a>
-              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="/admin/checkBooking">Check Booking</a>
-              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="/admin/cancelBooking">Cancel bookings</a>
-              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="/admin/verifyPayment">Verify Deposit</a>
-              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="/admin/manageRoute">Manage Route</a>
+              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="/admin?role=a">Dashboard</a>
+              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="/admin/checkBooking?role=a">Check Booking</a>
+              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="/admin/cancelBooking?role=a">Cancel bookings</a>
+              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="/admin/verifyPayment?role=a">Verify Deposit</a>
+              <a class="text-[#1C160C] text-sm font-medium leading-normal" href="/admin/manageRoute?role=a">Manage Route</a>
 
             </div>
             <div class="flex gap-2 items-center">
@@ -46,7 +48,7 @@ function Header() {
               </button>
             </div>
           </div>
-        </header> : user && <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#F4EFE6] px-10 py-3">
+        </header> : <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#F4EFE6] px-10 py-3">
           <div class="flex items-center gap-4 text-[#1C160C]">
             <div class="size-4">
               <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">

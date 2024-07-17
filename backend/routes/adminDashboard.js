@@ -150,7 +150,7 @@ router.delete('/delete/:id', async (req, res) => {
 
 router.get('/deposits', async (req, res) => {
   try {
-    const deposits = await Deposit.find().populate('user', 'userName email');
+    const deposits = await Deposit.find().populate('user', 'fullName email');
 
     const depositsWithBase64Receipt = deposits.map(deposit => ({
       ...deposit._doc,

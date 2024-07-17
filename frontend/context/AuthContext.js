@@ -43,6 +43,10 @@ export function AuthProvider({ children }) {
       },
     });
     setUser(userData.user);
+    if(user?.role == 'admin') {
+      router.push('/admin?role=a')
+      return;
+    }
     router.push('/');
   };
 

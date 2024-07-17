@@ -17,7 +17,7 @@ function PaymentDetails({ payment }) {
               </div>
               <div class="col-span-2 grid grid-cols-subgrid border-t border-t-[#E9DFCE] py-5">
                 <p class="text-[#A18249] text-sm font-normal leading-normal">User</p>
-                <p class="text-[#1C160C] text-sm font-normal leading-normal">John Smith</p>
+                <p class="text-[#1C160C] text-sm font-normal leading-normal">{payment.user}</p>
               </div>
             </div>
   )

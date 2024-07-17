@@ -1,13 +1,18 @@
+'use client'
 import PaymentDetails from '@/app/components/PaymentDetails';
 import ProofOfPayment from '@/app/components/ProofOfPayment';
+import { useSearchParams } from 'next/navigation';
 import React from 'react'
 
 function VerifyPaymentSpec() {
+    const searchParams = useSearchParams();
+    const name = searchParams.get('name');
+    const amount = searchParams.get('amount');
     const payment = {
         method: 'Visa 1234',
         status: 'Paid',
-        amount: '$12.00',
-        user: 'John Smith'
+        amount: amount,
+        user: name
       };
   return (
     <div>

@@ -1,4 +1,5 @@
 'use client'
+import ProtectedAdminRoute from '@/components/ProtectedAdminRoute';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import React, { useEffect, useState } from 'react'
 
@@ -92,7 +93,7 @@ function page() {
       )) 
   };
   return (
-    <ProtectedRoute>
+    <ProtectedAdminRoute>
     <div className="relative flex size-full min-h-screen flex-col bg-[#FFFFFF] group/design-root overflow-x-hidden">
       <div className="layout-container flex h-full grow flex-col">
         <div className="px-40 flex flex-1 justify-center py-5">
@@ -162,7 +163,7 @@ function page() {
         </div>
       </div>
     </div>
-    </ProtectedRoute>
+    </ProtectedAdminRoute>
   )
 }
 
